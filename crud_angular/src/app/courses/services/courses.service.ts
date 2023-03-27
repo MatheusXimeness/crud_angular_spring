@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { first, tap } from 'rxjs/operators';
+import { delay, first, tap } from 'rxjs/operators';
 
 import { Course } from '../model/course';
 
@@ -17,6 +17,7 @@ export class CoursesService {
     return this.httpClient.get<Course[]>(this.API) // esse é um observable que retorna um array de Courses
     .pipe(
       first(), // pega o primeiro dado que o endpoint retornar e encerra a conexão
+      delay(5000),
       tap(courses => console.log(courses))
     );
   }
