@@ -11,12 +11,12 @@ import { CoursesService } from '../services/courses.service';
 })
 export class CoursesComponent implements OnInit {
 
-  courses: Observable<Course[]>; // variavel ganhou o tipo do model que foi criado
+  courses$: Observable<Course[]>;
 
   displayedColumns = ['name', 'category'];
 
   constructor(private coursesService: CoursesService) {
-    this.courses = this.coursesService.list();
+    this.courses$ = this.coursesService.list();
   }
 
   ngOnInit(): void {
