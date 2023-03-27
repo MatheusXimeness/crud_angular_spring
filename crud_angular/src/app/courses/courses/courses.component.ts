@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
 
 import { Course } from '../model/course';
 import { CoursesService } from '../services/courses.service';
@@ -10,8 +11,7 @@ import { CoursesService } from '../services/courses.service';
 })
 export class CoursesComponent implements OnInit {
 
-  courses: Course[] = []; // variavel ganhou o tipo do model que foi criado
-
+  courses: Observable<Course[]>; // variavel ganhou o tipo do model que foi criado
 
   displayedColumns = ['name', 'category'];
 
