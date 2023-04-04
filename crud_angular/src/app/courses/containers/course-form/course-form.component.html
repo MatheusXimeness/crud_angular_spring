@@ -5,7 +5,7 @@
     <form [formGroup]="form" class="min-width"> <!-- fazendo associação ao form do .ts-->
       <mat-form-field class="full-width">
         <input #name matInput placeholder="Nome" formControlName="name"> <!-- fazendo associação ao name no form do .ts-->
-        <mat-hint align="end"> {{ name.value?.length || 0 }} / 100 </mat-hint>
+        <mat-hint align="end"> {{ name.value.length || 0 }} / 100 </mat-hint>
         <mat-error *ngIf="form.get('name')?.invalid">{{ getErrorMessage('name') }}</mat-error>
       </mat-form-field>
 
