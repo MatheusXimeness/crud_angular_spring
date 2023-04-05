@@ -8,13 +8,16 @@ mat-card {
   width: 100%;
 }
 
-div {
-  max-width: 80%;
-  margin: 1em auto;
+.actions-center {
+  justify-content: center;
 }
 
 .min-width {
   width: 100%;
   min-width: 150px;
+}
+
+.btn-space {
+  margin-left: 5px;
 }
 
