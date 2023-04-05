@@ -27,10 +27,9 @@ public class CourseController {
 
     // -------- CREATE -------- //
     @PostMapping // C(create)
-    public ResponseEntity<Course> create(@RequestBody @Valid Course course ){ //requestBody indica que estou trazendo parte de um curso
-        //System.out.println(hero.getName());
-        return ResponseEntity.status(HttpStatus.CREATED)
-                .body(courseService.create(course )); //esse retorno mostra para o desenvolvedor o status da requisição
+    @ResponseStatus(HttpStatus.CREATED)
+    public Course create(@RequestBody @Valid Course course ){ //requestBody indica que estou trazendo parte de um curso
+        return courseService.create(course);
     }
     // -------- -------- //
 
@@ -41,30 +40,24 @@ public class CourseController {
     }
 
     @GetMapping("/{id}") // R(read by id)
-    public ResponseEntity<Course> findById(@PathVariable @NotNull @Positive Long id) { // @PathVariable indica que vem uma variavel no caminho da API
-        return courseService.findById(id)
-                .map(record -> ResponseEntity.ok().body(record))
-                .orElse(ResponseEntity.notFound().build());
+    public Course findById(@PathVariable @NotNull @Positive Long id) { // @PathVariable indica que vem uma variavel no caminho da API
+        return courseService.findById(id);
     }
     // -------- -------- //
 
 
     // -------- UPDATE -------- //
     @PutMapping("/{id}") // U(update)
-    public ResponseEntity<Course> update(@PathVariable @NotNull @Positive Long id, @RequestBody @Valid Course course) {
-        return courseService.update(id, course)
-                .map(recordFound -> ResponseEntity.ok().body(recordFound) )
-                .orElse(ResponseEntity.notFound().build());
+    public Course update(@PathVariable @NotNull @Positive Long id, @RequestBody @Valid Course course) {
+        return courseService.update(id, course);
     }
     // -------- -------- //
 
     // -------- DELETE -------- //
     @DeleteMapping("/{id}") // D(delete)
-    public ResponseEntity<Void> delete(@PathVariable @NotNull @Positive Long id) {
-        if( courseService.delete(id) ) {
-            return ResponseEntity.noContent().<Void>build();
-        }
-        return ResponseEntity.notFound().build();
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void delete(@PathVariable @NotNull @Positive Long id) {
+        courseService.delete(id);
     }
     // -------- -------- //
 
