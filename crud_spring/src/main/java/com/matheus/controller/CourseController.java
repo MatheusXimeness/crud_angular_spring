@@ -1,6 +1,6 @@
 package com.matheus.controller;
 
-import com.matheus.model.Course;
+import com.matheus.dto.CourseDTO;
 import com.matheus.repository.CourseRepository;
 import com.matheus.service.CourseService;
 import org.springframework.http.HttpStatus;
@@ -28,19 +28,19 @@ public class CourseController {
     // -------- CREATE -------- //
     @PostMapping // C(create)
     @ResponseStatus(HttpStatus.CREATED)
-    public Course create(@RequestBody @Valid Course course ){ //requestBody indica que estou trazendo parte de um curso
+    public CourseDTO create(@RequestBody @Valid @NotNull CourseDTO course ){ //requestBody indica que estou trazendo parte de um curso
         return courseService.create(course);
     }
     // -------- -------- //
 
     // -------- READ -------- //
     @GetMapping // R(read)
-    public @ResponseBody List<Course> list () {
+    public @ResponseBody List<CourseDTO> list () {
         return courseService.list();
     }
 
     @GetMapping("/{id}") // R(read by id)
-    public Course findById(@PathVariable @NotNull @Positive Long id) { // @PathVariable indica que vem uma variavel no caminho da API
+    public CourseDTO findById(@PathVariable @NotNull @Positive Long id) { // @PathVariable indica que vem uma variavel no caminho da API
         return courseService.findById(id);
     }
     // -------- -------- //
@@ -48,7 +48,7 @@ public class CourseController {
 
     // -------- UPDATE -------- //
     @PutMapping("/{id}") // U(update)
-    public Course update(@PathVariable @NotNull @Positive Long id, @RequestBody @Valid Course course) {
+    public CourseDTO update(@PathVariable @NotNull @Positive Long id, @RequestBody @Valid @NotNull CourseDTO course) {
         return courseService.update(id, course);
     }
     // -------- -------- //
