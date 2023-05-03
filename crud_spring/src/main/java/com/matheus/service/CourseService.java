@@ -2,6 +2,7 @@ package com.matheus.service;
 
 import com.matheus.dto.CourseDTO;
 import com.matheus.dto.mapper.CourseMapper;
+import com.matheus.enums.Category;
 import com.matheus.exception.RecordNotFoundException;
 import com.matheus.repository.CourseRepository;
 import org.springframework.stereotype.Service;
@@ -46,7 +47,7 @@ public class CourseService {
         return courseRepository.findById(id)
                 .map( recordFound -> {
                     recordFound.setName(course.name());
-                    recordFound.setCategory(course.category());
+                    recordFound.setCategory(Category.FRONT_END);
                     return courseMapper.toDTO(courseRepository.save(recordFound));
                 }).orElseThrow(() -> new RecordNotFoundException(id));
     }
