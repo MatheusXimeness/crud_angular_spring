@@ -2,12 +2,11 @@ package com.matheus.service;
 
 import com.matheus.dto.CourseDTO;
 import com.matheus.dto.mapper.CourseMapper;
-import com.matheus.enums.Category;
+
 import com.matheus.exception.RecordNotFoundException;
 import com.matheus.repository.CourseRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.PathVariable;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
@@ -34,7 +33,7 @@ public class CourseService {
                 .collect(Collectors.toList()); // retorna uma list
     }
 
-    public CourseDTO findById(@PathVariable @NotNull @Positive Long id) {
+    public CourseDTO findById(@NotNull @Positive Long id) {
         return courseRepository.findById(id).map(courseMapper::toDTO)
                 .orElseThrow(() -> new RecordNotFoundException(id));
     }
@@ -47,12 +46,12 @@ public class CourseService {
         return courseRepository.findById(id)
                 .map( recordFound -> {
                     recordFound.setName(course.name());
-                    recordFound.setCategory(Category.FRONT_END);
+                    recordFound.setCategory(courseMapper.convertCategoryValue(course.category()));
                     return courseMapper.toDTO(courseRepository.save(recordFound));
                 }).orElseThrow(() -> new RecordNotFoundException(id));
     }
 
-    public void delete(@PathVariable @NotNull @Positive Long id) {
+    public void delete(@NotNull @Positive Long id) {
 
         courseRepository.delete(courseRepository.findById(id)
                 .orElseThrow(() -> new RecordNotFoundException(id))

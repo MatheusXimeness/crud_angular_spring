@@ -1,10 +1,8 @@
 package com.matheus.controller;
 
 import com.matheus.dto.CourseDTO;
-import com.matheus.repository.CourseRepository;
 import com.matheus.service.CourseService;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -35,7 +33,7 @@ public class CourseController {
 
     // -------- READ -------- //
     @GetMapping // R(read)
-    public @ResponseBody List<CourseDTO> list () {
+    public List<CourseDTO> list () {
         return courseService.list();
     }
 

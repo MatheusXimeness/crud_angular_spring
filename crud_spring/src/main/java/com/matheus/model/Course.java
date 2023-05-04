@@ -2,7 +2,9 @@ package com.matheus.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.matheus.enums.Category;
+import com.matheus.enums.Status;
 import com.matheus.enums.converters.CategoryConverter;
+import com.matheus.enums.converters.StatusConverter;
 import lombok.Data;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
@@ -11,7 +13,6 @@ import org.hibernate.validator.constraints.Length;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
 
 @Data
 @Entity // nesse caso utilizando entity é criada uma tabela com o nome dessa classe no BD
@@ -37,8 +38,7 @@ public class Course {
     private Category category;
 
     @NotNull
-    @Length( max = 10)
-    @Pattern(regexp = "Ativo|Inativo")
     @Column(length = 10, nullable = false)
-    private String status = "Ativo";
+    @Convert(converter = StatusConverter.class)
+    private Status status = Status.ACTIVE;
 }
