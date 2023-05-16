@@ -13,6 +13,8 @@ import org.hibernate.validator.constraints.Length;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import java.util.ArrayList;
+import java.util.List;
 
 @Data
 @Entity // nesse caso utilizando entity é criada uma tabela com o nome dessa classe no BD
@@ -41,4 +43,7 @@ public class Course {
     @Column(length = 10, nullable = false)
     @Convert(converter = StatusConverter.class)
     private Status status = Status.ACTIVE;
+
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "course")
+    private List<Lesson> lessons = new ArrayList<>();
 }
